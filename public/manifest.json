@@ -1,0 +1,18 @@
+{
+  "name": "HisaabKitab - Daily Business Records",
+  "short_name": "HisaabKitab",
+  "description": "Smart mobile-first business ledger & daily record tracker for retail, marts and restaurants.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+  <rect width="496" height="496" x="8" y="8" rx="120" fill="none" stroke="#34d399" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Ledger Book Body -->
+  <rect x="110" y="96" width="292" height="320" rx="28" fill="#1e293b" stroke="#334155" stroke-width="6" />
+  
+  <!-- Spine decoration -->
+  <rect x="110" y="96" width="48" height="320" rx="20" fill="#047857" opacity="0.9" />
+  <line x1="158" y1="96" x2="158" y2="416" stroke="#065f46" stroke-width="4" />
+  
+  <!-- Glowing Rupee Symbol -->
+  <g filter="url(#glow)">
+    <text x="280" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="160" font-weight="900" fill="url(#goldGrad)" text-anchor="middle" dominant-baseline="middle">₹</text>
+  </g>
+  
+  <!-- Small spark/badge -->
+  <circle cx="370" cy="140" r="14" fill="#34d399" />
+</svg>
