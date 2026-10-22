@@ -91,9 +91,9 @@ export function QuickEntryModal({
         type,
         amount: rupeeToPaise(numeric),
         categoryId,
-        partyName: partyName.trim() || undefined,
+        partyName: partyName.trim() || "",
         paymentMode,
-        note: note.trim() || undefined,
+        note: note.trim() || "",
         dateKey,
         createdBy: user?.uid || "anonymous",
       });

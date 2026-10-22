@@ -286,17 +286,12 @@ export class FirestoreDataService implements DataService {
       categoryId: data.categoryId,
       paymentMode: data.paymentMode,
       dateKey: data.dateKey,
+      partyName: data.partyName || "",
+      note: data.note || "",
       createdBy: data.createdBy || "anonymous",
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     };
-
-    if (data.partyName) {
-      payload.partyName = data.partyName;
-    }
-    if (data.note) {
-      payload.note = data.note;
-    }
 
     const docRef = await addDoc(txCol, payload);
 
