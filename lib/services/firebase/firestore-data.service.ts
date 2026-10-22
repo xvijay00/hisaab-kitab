@@ -167,10 +167,16 @@ export class FirestoreDataService implements DataService {
     this.ensureConfigured();
     const db = getFirebaseDb();
     const catCol = collection(db, "businesses", businessId, "categories");
-    const docRef = await addDoc(catCol, {
-      ...data,
+    const payload: Record<string, unknown> = {
       businessId,
-    });
+      name: data.name,
+      kind: data.kind,
+      color: data.color || "#10b981",
+      isDefault: !!data.isDefault,
+    };
+    if (data.icon) payload.icon = data.icon;
+
+    const docRef = await addDoc(catCol, payload);
     return {
       id: docRef.id,
       businessId,
@@ -272,12 +278,27 @@ export class FirestoreDataService implements DataService {
     this.ensureConfigured();
     const db = getFirebaseDb();
     const txCol = collection(db, "businesses", businessId, "transactions");
-    const docRef = await addDoc(txCol, {
-      ...data,
+
+    const payload: Record<string, unknown> = {
       businessId,
+      type: data.type,
+      amount: data.amount,
+      categoryId: data.categoryId,
+      paymentMode: data.paymentMode,
+      dateKey: data.dateKey,
+      createdBy: data.createdBy || "anonymous",
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
-    });
+    };
+
+    if (data.partyName) {
+      payload.partyName = data.partyName;
+    }
+    if (data.note) {
+      payload.note = data.note;
+    }
+
+    const docRef = await addDoc(txCol, payload);
 
     return {
       ...data,
@@ -296,10 +317,20 @@ export class FirestoreDataService implements DataService {
     this.ensureConfigured();
     const db = getFirebaseDb();
     const docRef = doc(db, "businesses", businessId, "transactions", id);
-    await updateDoc(docRef, {
-      ...data,
+
+    const payload: Record<string, unknown> = {
       updatedAt: serverTimestamp(),
-    });
+    };
+
+    if (data.type !== undefined) payload.type = data.type;
+    if (data.amount !== undefined) payload.amount = data.amount;
+    if (data.categoryId !== undefined) payload.categoryId = data.categoryId;
+    if (data.paymentMode !== undefined) payload.paymentMode = data.paymentMode;
+    if (data.dateKey !== undefined) payload.dateKey = data.dateKey;
+    if (data.partyName !== undefined) payload.partyName = data.partyName || "";
+    if (data.note !== undefined) payload.note = data.note || "";
+
+    await updateDoc(docRef, payload);
     const updated = await this.getTransaction(businessId, id);
     if (!updated) throw new Error("Transaction not found");
     return updated;
